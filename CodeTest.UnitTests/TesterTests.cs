@@ -15,6 +15,9 @@ namespace CodeTest.Tests
         [DataRow("racecar", true)]
         [DataRow("hello", false)]
         [DataRow("", true)]
+        [DataRow("Racecar", true)]
+        [DataRow("MadamI'mAdam", true)]
+        [DataRow("Madam I'm Adam.", true)]
         public void IsPalindrome(string input, bool expectedOutput)
         {
             bool output = Tester.IsPalindrome(input);
@@ -44,7 +47,7 @@ namespace CodeTest.Tests
         }
 
         [TestMethod]
-        [DataRow(new int[] { 1, 2, 3 }, new int[] { 3, 4, 5 }, new int[] {1, 2, 4, 5 })]
+        [DataRow(new int[] { 1, 2, 3 }, new int[] { 3, 4, 5 }, new int[] { 1, 2, 4, 5 })]
         public void GetDiff(int[] input1, int[] input2, int[] expected)
         {
             int[] result = Tester.GetDiff(input1, input2);
