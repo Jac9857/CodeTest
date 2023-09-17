@@ -15,17 +15,33 @@ namespace CodeTest
         /// <returns>bool</returns>
         public static bool IsPalindrome(string input)
         {
-            return false;
+            string strippedInput = "";
+            foreach(char c in input) 
+            { 
+                if (!char.IsPunctuation(c) && c != ' ')
+                {
+                    strippedInput += c;
+                } 
+            }
+            
+            char[] strArr = strippedInput.ToCharArray();
+            Array.Reverse(strArr);
+            string revStr = new string(strArr);
+            return strippedInput.Equals(revStr, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
         /// Function that takes a string and returns the count of each character in the string
         /// </summary>
-        /// <param name="inpput">input string</param>
+        /// <param name="input">input string</param>
         /// <returns>Dictionary with each character from the string as the key and the count of each charter as the value</returns>
-        public static Dictionary<char, int> CharacterCount(string inpput)
+        public static Dictionary<char, int> CharacterCount(string input)
         {
             Dictionary<char, int> output = new Dictionary<char, int>();
+
+            foreach (char letter in input) 
+                if (output.ContainsKey(letter)) { output[letter]++; }
+                else { output.Add(letter, 1); }
 
             return output;
         }
@@ -39,7 +55,11 @@ namespace CodeTest
         /// <returns>an array of integers</returns>
         public static int[] GetMatches(int[] input1, int[] input2)
         {
-            int[] output =  new int[0];            
+            List<int> matches = new List<int>();
+            foreach (int i in input1)  
+                if (input2.Contains(i)) { matches.Add(i); }
+
+            int[] output = matches.ToArray(); 
 
             return output;
         }
@@ -53,7 +73,15 @@ namespace CodeTest
         /// <returns>an array of integers</returns>
         public static int[] GetDiff(int[] input1, int[] input2)
         {
-            int[] output = new int[0];
+            List<int> NotMatches = new List<int>();
+
+            foreach (int i in input1)
+                if (!input2.Contains(i)) { NotMatches.Add(i); }
+            
+            foreach (int i in input2)
+                if (!input1.Contains(i)) { NotMatches.Add(i); }
+          
+            int[] output = NotMatches.ToArray();
 
             return output;
         }
